@@ -1,0 +1,13 @@
+wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz
+
+tar -zxf jdk-8u144-linux-x64.tar.gz -C /opt/jdk
+
+sudo update-alternatives --set java /opt/jdk/jdk1.8.0_144/bin/java
+sudo update-alternatives --set javac /opt/jdk/jdk1.8.0_144/bin/javac
+
+apt-get install maven
+apt-get install git
+
+
+# mount to build the source
+ravik$ docker run -it -p 8080:8080 -v /Users/ravik/nsf/cicd/servlet/:/webapp nsfbuild:1.0 /bin/bash
