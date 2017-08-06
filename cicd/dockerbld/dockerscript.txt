@@ -1,3 +1,4 @@
+
 wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz
 
 tar -zxf jdk-8u144-linux-x64.tar.gz -C /opt/jdk
@@ -9,5 +10,36 @@ apt-get install maven
 apt-get install git
 
 
+
+##  Build the image locally
 # mount to build the source
 ravik$ docker run -it -p 8080:8080 -v /Users/ravik/nsf/cicd/servlet/:/webapp nsfbuild:1.0 /bin/bash
+
+# build it, create the docker image (say 68e02d in the example below)
+
+
+
+
+##  Push the image to ECR
+# get docker login information (*region is important*)
+aws ecr get-login --region us-west-1
+
+# login to docker for the push to ecr
+docker login -u AWS -p eyJw...
+
+# tag the image in docker with the ECR arn
+docker tag 68e02d 850101374413.dkr.ecr.us-west-1.amazonaws.com/nsf:1.0
+
+# push the image
+docker push 850101374413.dkr.ecr.us-west-1.amazonaws.com/nsf:1.0
+
+
+
+
+## Generate the ECS Task definition
+# Get template for all ews task option, edit appropriately
+aws ecs register-task-definition --generate-cli-skeleton --region us-west-1
+
+# create an ECS task definition programmatically
+aws ecs register-task-definition --cli-input-json file:///Users/ravik/nsf/cicd/dockerbld/taskdesc.json --region us-west-1
+
