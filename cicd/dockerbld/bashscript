@@ -1,0 +1,1 @@
+`host -t SRV test.binitup.com | awk '{print "export BITCOIN_SERVICE_HOST="substr($8, 1, length($8) - 1); print "export BITCOIN_SERVICE_PORT="$7}'`
