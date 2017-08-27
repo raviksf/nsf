@@ -1,2 +1,2 @@
-FROM nsfrun:1.0
+FROM test_msvc:2.0
 CMD ["/home/auser/runapp"]

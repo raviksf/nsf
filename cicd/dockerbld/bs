@@ -1,0 +1,1 @@
+`host -t SRV sample_myservice_8081_v1.binitup.com | awk '{print "export SAMPLE_MYSERVICE_8081_V1_HOST="substr($8, 1, length($8) - 1); print "export SAMPLE_MYSERVICE_8081_V1_PORT="$7}'`

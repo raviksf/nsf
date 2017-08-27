@@ -1,0 +1,5 @@
+#!/bin/sh
+`host -t SRV test.binitup.com | awk '{print "export BITCOIN_SERVICE_HOST="substr($8, 1, length($8) - 1); print "export BITCOIN_SERVICE_PORT="$7}'`
+cd /home/auser/apache-tomcat-7.0.81
+./bin/startup.sh
+tail -f /var/log/dmesg
